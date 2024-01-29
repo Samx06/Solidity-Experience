@@ -182,10 +182,14 @@ contract ScholarshipCreditContract {
         uint256 result;
         bool check;
         for (uint8 i = 0; i < students.length; i++) {
-            if (msg.sender == students[i] && keccak256(abi.encodePacked(toLowerCase(category))) == keccak256(abi.encodePacked(toLowerCase(categories[i])))) {
-                result = Students[msg.sender][i];
-                check = true;
-                break;
+            if (msg.sender == students[i]) {
+                for(uint8 j = 0; j < categories.length; j++) {
+                    if (keccak256(abi.encodePacked(toLowerCase(category))) == keccak256(abi.encodePacked(toLowerCase(categories[j])))) {
+                        result = Students[msg.sender][j];
+                        check = true;
+                        break;
+                    }
+                }
             }
         }
         for (uint256 j = 0; j < merchants.length; j++) {
